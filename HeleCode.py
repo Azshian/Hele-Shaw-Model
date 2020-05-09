@@ -1,15 +1,17 @@
+#Libraries
 import numpy as np
 import matplotlib.pyplot as plt
 import tkinter as tk
 import os
 
+#Set File
 user = 'Adriann Liceralde'
 file = 'F42A.dat' 
 os.chdir('C:\\Users\\'+str(user)+'\\Desktop\\Repository\\HeleShaw\\CoreSamples')
-
-isize = 300 #Do Not Change from 300
+isize = 300                             #Do Not Change from 300
 X = np.loadtxt(file, skiprows = 4)
 
+#Extract values from slider
 def take_values():
     input1 = w1.get()
     input2 = w2.get()
@@ -18,6 +20,7 @@ def take_values():
     input5 = w5.get()
     return input1, input2, input3, input4, input5
 
+#Show Image
 def whatever():
     plt.close('all')
     x_top    = 0
@@ -35,7 +38,6 @@ def whatever():
     print("X Right:","\t", x_right)
     print("Y Top:", "\t", "\t", y_top)
     print("Y Bot:", "\t", "\t", y_bot)
-    print("")
     print("Z Level:" "\t", islice)
 
     X2 = X[isize*islice:isize*islice+isize,:]
@@ -44,20 +46,26 @@ def whatever():
     
     width = x_right - x_left
     length = y_top - y_bot
-
     print("Width:", "\t", "\t", width)
     print("Length:", "\t", length)
+    print("")
     plt.text(-30, 325, "Width: " + str(width))
     plt.text(-30, 310, "Length:" + str(length))
 
-    plt.hlines(y_bot, 0, 299, 'r')
-    plt.hlines(y_top, 0, 299, 'r')
-    plt.vlines(x_left, 0, 299, 'r')
-    plt.vlines(x_right, 0, 299, 'r')
+    #plt.hlines(y_bot, 0, 299, 'r')
+    #plt.hlines(y_top, 0, 299, 'r')
+    #plt.vlines(x_left, 0, 299, 'r')
+    #plt.vlines(x_right, 0, 299, 'r')
+
+    plt.hlines(y_bot, x_left, x_right, 'r')
+    plt.hlines(y_top, x_left, x_right, 'r')
+    plt.vlines(x_left, y_bot, y_top, 'r')
+    plt.vlines(x_right, y_bot, y_top, 'r')
     plt.title('Height Level:'+str(islice))
     plt.show()
 
 
+#Tinker GUI
 while 1:
     m = tk.Tk()
     m.title('Area Selection')
@@ -81,6 +89,5 @@ while 1:
     w5.pack()
 
     s = tk.Button(m, text='Show Area', command=whatever).pack()
-
     m.mainloop()
     break
