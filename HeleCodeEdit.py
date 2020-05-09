@@ -10,6 +10,7 @@ os.chdir('C:\\Users\\'+str(user)+'\\Desktop\\Repository\\HeleShaw\\CoreSamples')
 isize = 300 #Do Not Change from 300
 X = np.loadtxt(file, skiprows = 4)
 
+
 def take_values():
     input1 = w1.get()
     input2 = w2.get()
@@ -17,6 +18,7 @@ def take_values():
     input4 = w4.get()
     input5 = w5.get()
     return input1, input2, input3, input4, input5
+
 
 def whatever():
     plt.close('all')
@@ -26,29 +28,20 @@ def whatever():
     y_right  = 300
 
     inp = take_values()
-    y_top   = inp[0]
-    y_bot   = inp[1]
+    y_bot   = inp[0]
+    y_top   = inp[1]
     x_left  = inp[2]
     x_right = inp[3]
-    islice  = inp[4]
-    print("X Left:", "\t", x_left)
-    print("X Right:","\t", x_right)
-    print("Y Top:", "\t", "\t", y_top)
-    print("Y Bot:", "\t", "\t", y_bot)
-    print("")
-    print("Z Level:" "\t", islice)
 
+    islice = inp[4]
     X2 = X[isize*islice:isize*islice+isize,:]
     plt.matshow(X2[x_top : x_bottom, y_left : y_right], origin = 'lower')
+
+    islice2 = 100
+    X3 = X[isize*islice2:isize*islice2+isize,:]
+    plt.matshow(X3[x_top : x_bottom, y_left : y_right], origin = 'lower')
     plt.gca().xaxis.tick_bottom()
     
-    width = x_right - x_left
-    length = y_top - y_bot
-
-    print("Width:", "\t", "\t", width)
-    print("Length:", "\t", length)
-    plt.text(-30, 325, "Width: " + str(width))
-    plt.text(-30, 310, "Length:" + str(length))
 
     plt.hlines(y_bot, 0, 299, 'r')
     plt.hlines(y_top, 0, 299, 'r')
@@ -56,7 +49,6 @@ def whatever():
     plt.vlines(x_right, 0, 299, 'r')
     plt.title('Height Level:'+str(islice))
     plt.show()
-
 
 while 1:
     m = tk.Tk()
@@ -80,7 +72,8 @@ while 1:
     w5.set(1)
     w5.pack()
 
-    s = tk.Button(m, text='Show Area', command=whatever).pack()
 
+    s = tk.Button(m, text='Show Area', command=whatever).pack()
     m.mainloop()
+
     break
