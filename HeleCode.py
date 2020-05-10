@@ -3,23 +3,24 @@ import numpy as np
 import matplotlib.pyplot as plt
 import tkinter as tk
 import os
+import sys
 
 #Set File
-user = 'Adriann Liceralde'
+user = 'adria'
 file = 'F42A.dat' 
 os.chdir('C:\\Users\\'+str(user)+'\\Desktop\\Repository\\HeleShaw\\CoreSamples')
 isize = 300 #Do Not Change from 300
 X = np.loadtxt(file, skiprows = 4)
 
 #Extract values from slider
-def take_values():
+def takeValues():
     input1,input2,input3,input4,input5 = w1.get(),w2.get(),w3.get(),w4.get(),w5.get()
     return input1, input2, input3, input4, input5
 
 #Show Image
-def whatever():
+def showImage():
     plt.close('all')
-    inp = take_values()
+    inp = takeValues()
     y_top,y_bot,x_left,x_right = inp[0],inp[1],inp[2],inp[3]
     islice  = inp[4]
     print('X Left:', '\t',  x_left)
@@ -48,8 +49,8 @@ def whatever():
     plt.show()
 
 #Cut Image
-def finalize():
-    inp = take_values()
+def cutImage():
+    inp = takeValues()
     y_top   = inp[0]
     y_bot   = inp[1]
     x_left  = inp[2]
@@ -62,6 +63,9 @@ def finalize():
     plt.gca().xaxis.tick_bottom()
     plt.axis('off')
     plt.show()
+
+def saveImage():
+    plt.savefig("CroppedImage.png",bbox_inches='tight', pad_inches=0)
 
 #Tinker GUI
 while 1:
@@ -83,8 +87,9 @@ while 1:
     w5 = tk.Scale(m, from_=0, to=298, length=400, orient=tk.HORIZONTAL, bg = 'skyblue', label='Height')
     w5.set(0)
     w5.pack()
-    show_button = tk.Button(m, width=15, text='Show Area', command=whatever, bg = 'gold').pack()
-    produce_button = tk.Button(m, width=15, text = 'Cut', command = finalize, bg = 'gold').pack()
+    show_button    = tk.Button(m, width=15, text='Show', command=showImage, bg = 'gold').pack()
+    produce_button = tk.Button(m, width=15, text='Cut',  command=cutImage,  bg = 'gold').pack()
+    save_button    = tk.Button(m, width=15, text='Save', command=saveImage, bg = 'gold').pack()
     
     m.mainloop()
     break
