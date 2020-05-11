@@ -7,6 +7,7 @@ import sys
 
 #Set File
 user = 'adria'
+user = 'Adriann Liceralde'
 file = 'F42A.dat' 
 os.chdir('C:\\Users\\'+str(user)+'\\Desktop\\Repository\\HeleShaw\\CoreSamples')
 isize = 300 #Do Not Change from 300
@@ -23,18 +24,14 @@ def showImage():
     inp = takeValues()
     y_top,y_bot,x_left,x_right = inp[0],inp[1],inp[2],inp[3]
     islice  = inp[4]
-    print('X Left:', '\t',  x_left)
-    print('X Right:','\t',  x_right)
-    print('Y Top:', 2*'\t', y_top)
-    print('Y Bot:', 2*'\t', y_bot)
-    print('Z Level:', '\t', islice)
 
     X2 = X[isize*islice:isize*islice+isize,:]
     plt.matshow(X2[0:300, 0:300], origin = 'lower')
     plt.gca().xaxis.tick_bottom()
     
-    width  = x_right - x_left
-    length = y_top - y_bot
+    width  = abs(x_right - x_left)
+    length = abs(y_top - y_bot)
+    print('Z Level:', '\t', islice)
     print('Width:', '\t', '\t', width)
     print('Length:', '\t', length)
     print('')
@@ -58,7 +55,16 @@ def cutImage():
     islice  = inp[4]
     plt.close('all')
     X3 = X[isize*islice:isize*islice+isize,:]
-    plt.matshow(X3[y_bot: y_top, x_left : x_right], origin = 'lower')
+
+    if (y_top > y_bot) and (x_right > x_left):
+        plt.matshow(X3[y_bot: y_top, x_left  : x_right], origin = 'lower')
+    if (y_top < y_bot) and (x_right > x_left):
+        plt.matshow(X3[y_top: y_bot, x_left  : x_right], origin = 'lower')
+    elif (y_top < y_bot) and (x_right < x_left):
+        plt.matshow(X3[y_top: y_bot, x_right : x_left], origin = 'lower')
+    elif (y_top > y_bot) and (x_right < x_left):
+        plt.matshow(X3[y_bot: y_top, x_right : x_left], origin = 'lower')
+
     plt.gca().xaxis.tick_bottom()
     plt.axis('off')
     plt.show()
@@ -73,14 +79,14 @@ while 1:
     m.configure(bg='tan')
 
     stop_button = tk.Button(m, width=25, command=m.destroy, bg = 'orangered', text='Stop').pack()
-    w1 = tk.Scale(m, from_=0, to=300, length=400, orient=tk.HORIZONTAL,bg= 'beige', label='Y Top')
+    w1 = tk.Scale(m, from_=1, to=300, length=400, orient=tk.HORIZONTAL, bg= 'beige', label='Y Top')
     w1.set(300)
     w1.pack()
-    w2 = tk.Scale(m, from_=0, to=300, length=400, orient=tk.HORIZONTAL,bg = 'beige', label='Y Bottom')
+    w2 = tk.Scale(m, from_=0, to=299, length=400, orient=tk.HORIZONTAL, bg = 'beige', label='Y Bottom')
     w2.pack()
-    w3 = tk.Scale(m, from_=0, to=300, length=400, orient=tk.HORIZONTAL, bg = 'beige', label='X Left')
+    w3 = tk.Scale(m, from_=0, to=299, length=400, orient=tk.HORIZONTAL, bg = 'beige', label='X Left')
     w3.pack()
-    w4 = tk.Scale(m, from_=0, to=300, length=400, orient=tk.HORIZONTAL, bg = 'beige', label='X Right')
+    w4 = tk.Scale(m, from_=1, to=300, length=400, orient=tk.HORIZONTAL, bg = 'beige', label='X Right')
     w4.set(300)
     w4.pack()
     w5 = tk.Scale(m, from_=0, to=298, length=400, orient=tk.HORIZONTAL, bg = 'skyblue', label='Height')
