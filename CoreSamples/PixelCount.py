@@ -1,9 +1,8 @@
 import os
-from PIL import Image
+from PIL import Image, ImageOps
 from collections import defaultdict
 import numpy
 
-print("LMAO")
 img = Image.open('CroppedImage.png')
 pixels = img.load()
 s = img.size
@@ -28,4 +27,6 @@ for i in range(img.size[0]):
 			pixels[i,j] = (255,255,255,255)
 print(counter_1, counter_2)
 img.show()
-img.save("FinalImage.png")
+newimg = ImageOps.expand(img, border=1, fill='black') 
+newimg.show()
+newimg.save("FinalImage.png")

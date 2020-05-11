@@ -7,7 +7,7 @@ import sys
 
 #Set File
 user = 'adria'
-user = 'Adriann Liceralde'
+#user = 'Adriann Liceralde'
 file = 'F42A.dat' 
 os.chdir('C:\\Users\\'+str(user)+'\\Desktop\\Repository\\HeleShaw\\CoreSamples')
 isize = 300 #Do Not Change from 300
