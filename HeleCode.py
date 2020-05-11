@@ -56,7 +56,6 @@ def cutImage():
     x_left  = inp[2]
     x_right = inp[3]
     islice  = inp[4]
-
     plt.close('all')
     X3 = X[isize*islice:isize*islice+isize,:]
     plt.matshow(X3[y_bot: y_top, x_left : x_right], origin = 'lower')
@@ -65,7 +64,7 @@ def cutImage():
     plt.show()
 
 def saveImage():
-    plt.savefig("CroppedImage.png",bbox_inches='tight', pad_inches=0)
+    plt.savefig('CroppedImage.png',bbox_inches='tight', pad_inches=0)
 
 #Tinker GUI
 while 1:
