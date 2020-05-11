@@ -28,3 +28,4 @@ for i in range(img.size[0]):
 			pixels[i,j] = (255,255,255,255)
 print(counter_1, counter_2)
 img.show()
+img.save("FinalImage.png")
