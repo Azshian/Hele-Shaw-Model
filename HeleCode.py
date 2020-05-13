@@ -6,12 +6,11 @@ import os
 import sys
 
 #Set File
-user = 'adria'
-#user = 'Adriann Liceralde'
-file = 'F42A.dat' 
-os.chdir('C:\\Users\\'+str(user)+'\\Desktop\\Repository\\HeleShaw\\CoreSamples')
-isize = 300 #Do Not Change from 300
-X = np.loadtxt(file, skiprows = 4)
+file = sys.argv[1]
+isize = int(sys.argv[2]) #Do Not Change from 300
+X = np.loadtxt(file)
+print(file.readline())
+#X = np.loadtxt(file, skiprows = 4)
 
 #Extract values from slider
 def takeValues():
@@ -26,7 +25,7 @@ def showImage():
     islice  = inp[4]
 
     X2 = X[isize*islice:isize*islice+isize,:]
-    plt.matshow(X2[0:300, 0:300], origin = 'lower')
+    plt.matshow(X2[0:isize, 0:isize], origin = 'lower')
     plt.gca().xaxis.tick_bottom()
     
     width  = abs(x_right - x_left)
@@ -38,10 +37,10 @@ def showImage():
     plt.text(-30, 325, 'Width: ' + str(width))
     plt.text(-30, 310, 'Length:' + str(length))
 
-    plt.hlines(y_bot,    x_left, x_right-1, 'r', linewidth = 2)
-    plt.hlines(y_top-1,  x_left, x_right-1, 'r', linewidth = 2)
-    plt.vlines(x_left,   y_bot,  y_top-1,   'r', linewidth = 2)
-    plt.vlines(x_right-1,y_bot,  y_top-1,   'r', linewidth = 2)
+    #plt.hlines(y_bot,    x_left, x_right-1, 'r', linewidth = 2)
+    #plt.hlines(y_top-1,  x_left, x_right-1, 'r', linewidth = 2)
+    #plt.vlines(x_left,   y_bot,  y_top-1,   'r', linewidth = 2)
+    #plt.vlines(x_right-1,y_bot,  y_top-1,   'r', linewidth = 2)
     plt.title('Height Level:'+str(islice))
     plt.show()
 
