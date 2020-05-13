@@ -14,12 +14,11 @@ file  = sys.argv[1]
 with open(file) as myfile:
     head = [next(myfile) for x in range(5)]
 if (head[0][0:5]) == 'ascii':               #check if there's header information
-    the_size = int(head[2][0:3])
     df = pd.read_csv(file, sep = ' ', header=None, skiprows = 4)
 elif (head[0][0] == str(0) or head[0][0] ==  str(1)):
     df = pd.read_csv(file, sep = ' ', header=None)
 df = df.iloc[:, :-1]
-print( df.shape[0], df.shape[1] )
+print( 'File Dimensions:', df.shape[0], 'by', df.shape[1] )
 X = df.to_numpy()
 del df
 isize = len(X[0])
@@ -84,21 +83,18 @@ def saveImage():
     print('Saving')
     plt.savefig('CroppedImage.png',bbox_inches='tight', pad_inches=0)
     plt.close('all')
+    
     img    = Image.open('CroppedImage.png')
     pixels = img.load()
     by_color = defaultdict(int)
     for pixel in img.getdata():
         by_color[pixel] += 1
 
-    counter_1 = 0
-    counter_2 = 0
     for i in range(img.size[0]):
             for j in range(img.size[1]):
                     if pixels[i,j][0] == 68 and pixels[i,j][1] == 1 and pixels[i,j][2] == 84:
-                            counter_1 += 1
                             pixels[i,j] = (0,0,0,255)
                     elif pixels[i,j][0] == 253 and pixels[i,j][1] == 231 and pixels[i,j][2] == 36:
-                            counter_2 += 1
                             pixels[i,j] = (255,255,255,255)
                             
     newimg = ImageOps.expand(img, border=1, fill='black') 
