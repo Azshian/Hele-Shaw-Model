@@ -31,7 +31,6 @@ def takeValues():
 
 #Show Image
 def showImage():
-    print('Saving')
     plt.close('all')
     inp = takeValues()
     y_top,y_bot,x_left,x_right = inp[0],inp[1],inp[2],inp[3]
@@ -82,6 +81,7 @@ def cutImage():
     plt.show()
 
 def saveImage():
+    print('Saving')
     plt.savefig('CroppedImage.png',bbox_inches='tight', pad_inches=0)
     plt.close('all')
     img    = Image.open('CroppedImage.png')
