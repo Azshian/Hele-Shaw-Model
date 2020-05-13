@@ -44,6 +44,8 @@ def showImage():
     print('Z Level:', '\t', islice)
     print('Width:', '\t', '\t', width)
     print('Length:', '\t', length)
+    if (width != length):
+        print('WARNING: NOT SQUARE')
     print('')
     plt.text(-30, isize+25, 'Width: ' + str(width))
     plt.text(-30, isize+10, 'Length:' + str(length))
