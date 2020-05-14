@@ -103,7 +103,7 @@ def saveImage():
     newimg.show()
     imgsize = newimg.size
     print(imgsize)
-    newimg.save("FinalImage.png")
+    newimg.save("NetworkSlice.png")
     os.remove('CroppedImage.png')
 
     
